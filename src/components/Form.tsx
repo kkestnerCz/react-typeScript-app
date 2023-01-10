@@ -16,7 +16,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 // context
-import { useFormCtx } from "../contexts/FormCtxProvider";
+import { useFormCtx, initialContext } from "../contexts/FormCtxProvider";
 
 type FormData = {
   name: string;
@@ -42,8 +42,13 @@ const Form = () => {
     setModalOpen(true);
   });
 
+  // will update form with ctx data loaded by useFEtch hook
+  useEffect(() => {
+    reset(dataCtx.formData); // Controllers use same name as context
+  }, [dataCtx.formData, reset]);
+
   // handles reset
-  const handleReset = () => reset();
+  const handleReset = () => reset(initialContext.formData); // Controllers use same name as context
 
   return (
     <form onSubmit={submit}>

@@ -32,7 +32,7 @@ export const useFetch = () => {
             lastApiCallState: false,
             alert: {
               type: "error",
-              message: e.response.data.message || "error occured",
+              message: e?.response?.data?.message || "error occured",
             },
           }));
           reject("error occured");
@@ -46,8 +46,47 @@ export const useFetch = () => {
 
   // loading form data from BE
   const loadFormData = () => {
-    // TODO: next time
+    dataCtx.setContext((prevState) => ({ ...prevState, loading: true })); // loading on
+    axios
+      .get(
+        `https://kkestner.cz/api/tstApiV1/?id=${
+          dataCtx.lastApiCallState ? 2 : 1 // here Iam faking errors in response by sending odd or even number in id param.
+        }&type=load`
+      )
+      .then((res) => {
+        let data = res?.data;
+        dataCtx.setContext((prevState) => ({
+          ...prevState,
+          lastApiCallState: true,
+          formData: {
+            name: data?.user?.name,
+            surname: data?.user?.surname,
+            street: data?.address?.street,
+            houseNr: data?.address?.houseNr,
+            city: data?.address?.city,
+            zipCode: data?.address?.zipCode,
+            phone: data?.user?.phone,
+          },
+          alert: {
+            type: "success",
+            message: res.data.message || "api call was ok",
+          },
+        }));
+      })
+      .catch((e) => {
+        dataCtx.setContext((prevState) => ({
+          ...prevState,
+          lastApiCallState: false,
+          alert: {
+            type: "error",
+            message: e?.response?.data?.message || "error occured",
+          },
+        }));
+      })
+      .finally(() => {
+        dataCtx.setContext((prevState) => ({ ...prevState, loading: false })); // loading off
+      });
   };
 
-  return { sendOrder };
+  return { sendOrder, loadFormData };
 };

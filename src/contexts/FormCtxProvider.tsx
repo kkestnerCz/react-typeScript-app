@@ -31,7 +31,7 @@ type Context = {
   clearFormData: () => void;
 };
 
-const initialContext: Context = {
+export const initialContext: Context = {
   formData: {
     name: "",
     surname: "",
