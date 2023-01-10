@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
 
-function App() {
+// routing
+import { HashRouter, Routes, Route } from "react-router-dom";
+
+// pages
+import Layout from "./pages/Layout";
+import FormPage from "./pages/FormPage";
+import ErrorPage from "./pages/ErrorPage";
+import SuccessPage from "./pages/SuccessPage";
+
+// custom components
+import AppLoader from "./components/AppLoader";
+import ThemeHandler from "./components/ThemeHandler";
+import InfoBar from "./components/InfoBar";
+
+// ctx
+import AppProviders from "./contexts";
+
+import "./App.css";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppProviders>
+      <ThemeHandler>
+        <AppLoader />
+        <InfoBar />
+        <HashRouter>
+          <Suspense fallback={<AppLoader forceOpen />}>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<FormPage />} />
+                <Route path="/success" element={<SuccessPage />} />
+                <Route path="*" element={<ErrorPage />} />
+              </Route>
+            </Routes>
+          </Suspense>
+        </HashRouter>
+      </ThemeHandler>
+    </AppProviders>
   );
-}
+};
 
 export default App;

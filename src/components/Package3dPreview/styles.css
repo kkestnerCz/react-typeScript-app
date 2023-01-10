@@ -1,0 +1,109 @@
+.packageWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-transform: rotateX(-20deg);
+  transform-origin: 20% 40%;
+  -webkit-transform: rotate(-20deg, 0, 0);
+  -webkit-animation: rotating 16s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    -webkit-transform: rotateX(-10deg) rotateY(0deg) rotateZ(0deg);
+  }
+  to {
+    -webkit-transform: rotateX(-10deg) rotateY(360deg) rotateZ(0deg);
+  }
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
+.shadowWrapper {
+  background-image: radial-gradient(#00000043 0%, transparent 60%);
+}
+
+.packageWrapper div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  box-shadow: 0 0 40px 10px rgba(0, 0, 0, 0.2) inset;
+  background-image: url("../../assets/packagePaper.jpg");
+}
+
+.packageWrapper .front {
+  width: 400px;
+  height: 250px;
+  transform: translateX(-50%) translateY(-50%) translateZ(100px);
+}
+
+.packageWrapper .leftSide {
+  width: 200px;
+  height: 250px;
+  transform: translateX(-50%) translateY(-50%) rotateY(-90deg) translateZ(200px);
+  box-shadow: 20px 20px 50px 10px rgba(0, 0, 0, 0.2) inset;
+}
+
+.packageWrapper .rightSide {
+  width: 200px;
+  height: 250px;
+  transform: translateX(-50%) translateY(-50%) rotateY(90deg) translateZ(200px);
+}
+
+.packageWrapper .top {
+  width: 400px;
+  height: 200px;
+  transform: translateX(-50%) translateY(-50%) rotateX(90deg) translateZ(125px);
+  background-image: linear-gradient(
+      0deg,
+      transparent 49%,
+      rgba(0, 0, 0, 0.283) 50%,
+      transparent 51%
+    ),
+    url("../../assets/packagePaper.jpg");
+}
+
+.packageWrapper .back {
+  width: 400px;
+  height: 250px;
+  transform: translateX(-50%) translateY(-50%) rotateY(-180deg)
+    translateZ(100px);
+}
+
+.packageWrapper div.recipientAddressBlock {
+  background-color: rgba(235, 235, 235, 0.9);
+  color: rgb(21, 21, 21);
+  min-width: 100px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+  background-image: none;
+  position: absolute;
+  left: unset;
+  top: unset;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px;
+  font-size: 9px;
+}
+
+.packageWrapper div.senderAddressBlock {
+  color: rgb(21, 21, 21);
+  min-width: 100px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+  background-image: none;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  padding: 5px;
+  font-size: 9px;
+
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M1 0 L0 1 L99 100 L100 99' fill='rgb(125, 125, 125)' /><path d='M0 99 L99 0 L100 1 L1 100' fill='rgb(125, 125, 125)' /></svg>"),
+    rgba(235, 235, 235, 0.9);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%, auto;
+}
