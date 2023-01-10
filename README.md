@@ -1,6 +1,6 @@
 # Simple React.js / typescript app
 
-You can find simple form validation with react-hook-form, routing with react-router-dom, simple api call with axios, some work with materialUI and even 3D animation with css.
+You can find simple form validation with react-hook-form, routing with react-router-dom, simple api calls with axios, some work with materialUI and even 3D animation with css.
 
 ## Available Scripts
 
